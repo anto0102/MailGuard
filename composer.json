@@ -15,7 +15,7 @@
     },
     "extra": {
         "flarum-extension": {
-            "title": "Email Domain Guard",
+            "title": "MailGuard",
             "category": "authentication",
             "icon": {
                 "name": "fas fa-shield-alt",
