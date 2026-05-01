@@ -1,6 +1,6 @@
 <?php
 
-namespace Anto0102\Sanized\Console;
+namespace Anto0102\MailGuard\Console;
 
 use Flarum\Console\AbstractCommand;
 use Flarum\Group\Group;
@@ -26,8 +26,8 @@ class AuditEmailDomainsCommand extends AbstractCommand
 
     protected function fire(): void
     {
-        $mode = $this->settings->get('anto0102-sanized.mode', 'allow');
-        $domainsRaw = $this->settings->get('anto0102-sanized.domains', '');
+        $mode = $this->settings->get('anto0102-mailguard.mode', 'allow');
+        $domainsRaw = $this->settings->get('anto0102-mailguard.domains', '');
 
         if (empty(trim($domainsRaw))) {
             $this->error('No domains configured. Set them in the admin panel first.');

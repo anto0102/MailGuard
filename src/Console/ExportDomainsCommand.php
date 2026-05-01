@@ -1,6 +1,6 @@
 <?php
 
-namespace Anto0102\Sanized\Console;
+namespace Anto0102\MailGuard\Console;
 
 use Flarum\Console\AbstractCommand;
 use Flarum\User\User;

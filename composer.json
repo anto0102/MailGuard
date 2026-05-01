@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Anto0102\\Sanized\\": "src/"
+            "Anto0102\\MailGuard\\": "src/"
         }
     },
     "extra": {

@@ -1,15 +1,15 @@
-# Flarum Sanized
+# Flarum MailGuard
 
 ![Flarum 2.0 Compatible](https://img.shields.io/badge/Flarum-2.0-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-Sanized is a lightweight, ultra-optimized Flarum 2.0 extension to securely guard and validate email domains during user registration. Built entirely without external GUI frameworks to guarantee 0 impact on server memory and instant real-time blocks.
+MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely guard and validate email domains during user registration. Built entirely without external GUI frameworks to guarantee 0 impact on server memory and instant real-time blocks.
 
 *(Include your screenshots here in the repository!)*
 
 ## Features
 
 * **Allowlist / Denylist**: Block specific disposable email domains or restrict your forum strictly to internal company emails.
-* **DNS/MX Live Validation**: Even if an email looks valid, Sanized does a live server intercept to verify if the MX records exist. Fake domains are instantly nuked.
+* **DNS/MX Live Validation**: Even if an email looks valid, MailGuard does a live server intercept to verify if the MX records exist. Fake domains are instantly nuked.
 * **Database Exporter**: Instantly retrieve and export the email domains of all users currently on your forum.
 * **CLI Auditing**: Run terminal commands to discover or remove users belonging to bad email domains.
 

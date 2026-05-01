@@ -1,6 +1,6 @@
 <?php
 
-namespace Anto0102\Sanized\Listener;
+namespace Anto0102\MailGuard\Listener;
 
 use Flarum\User\Event\Saving;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -25,15 +25,15 @@ class FilterEmailDomain
             return;
         }
 
-        $mode = $this->settings->get('anto0102-sanized.mode', 'allow');
-        $domains = trim($this->settings->get('anto0102-sanized.domains', ''));
+        $mode = $this->settings->get('anto0102-mailguard.mode', 'allow');
+        $domains = trim($this->settings->get('anto0102-mailguard.domains', ''));
 
         if ($domains === '') return;
 
         $domainList = array_filter(array_map('trim', explode("\n", strtolower($domains))));
         $emailDomain = strtolower(substr(strrchr($email, '@'), 1));
 
-        $checkMx = (bool) $this->settings->get('anto0102-sanized.check_mx', false);
+        $checkMx = (bool) $this->settings->get('anto0102-mailguard.check_mx', false);
         if ($checkMx && !checkdnsrr($emailDomain, 'MX')) {
             throw new ValidationException([
                 'email' => 'This email domain does not exist or cannot receive emails (MX record missing).'
@@ -48,7 +48,7 @@ class FilterEmailDomain
 
         if ($blocked) {
             throw new ValidationException([
-                'email' => $this->settings->get('anto0102-sanized.message', 'Registration with this email domain is not allowed.')
+                'email' => $this->settings->get('anto0102-mailguard.message', 'Registration with this email domain is not allowed.')
             ]);
         }
     }

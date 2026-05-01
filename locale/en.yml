@@ -1,4 +1,4 @@
-anto0102-sanized:
+anto0102-mailguard:
   admin:
     mode_label: "Domain filtering mode"
     mode_help: "Allow = only listed domains can register. Deny = listed domains are blocked."
