@@ -1,0 +1,27 @@
+{
+    "name": "acme/flarum-email-domain-guard",
+    "description": "Flarum extension to sanitize and validate email registrations",
+    "keywords": ["flarum", "email", "domain", "guard", "registration"],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "flarum/core": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anto0102\\Sanized\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Email Domain Guard",
+            "category": "authentication",
+            "icon": {
+                "name": "fas fa-shield-alt",
+                "backgroundColor": "#e74c3c",
+                "color": "#fff"
+            }
+        }
+    }
+}
