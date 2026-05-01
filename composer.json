@@ -1,5 +1,5 @@
 {
-    "name": "acme/flarum-email-domain-guard",
+    "name": "anto0102/mailguard",
     "description": "Flarum extension to sanitize and validate email registrations",
     "keywords": ["flarum", "email", "domain", "guard", "registration"],
     "type": "flarum-extension",
