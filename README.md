@@ -27,6 +27,7 @@ MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely gua
 
 ## ✨ Features
 * **Allowlist / Denylist Settings**: Block specific disposable email domains or restrict your forum strictly to internal company emails.
+* **Alias Anti-Fraud & Sanitization**: Protect your forum against "infinite registration" tricks using `+` or `.` aliases (like Gmail). Block them strictly or sanitize them silently to keep your database clean.
 * **DNS/MX Live Validation**: Even if an email looks valid, MailGuard does a live server intercept to verify if the MX records exist. Fake domains are instantly blocked.
 * **Database Exporter**: Instantly retrieve and export the email domains of all users currently on your forum.
 * **CLI Auditing**: Run terminal commands to discover or permanently remove users belonging to bad email domains.
