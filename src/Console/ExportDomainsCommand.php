@@ -4,10 +4,17 @@ namespace Anto0102\MailGuard\Console;
 
 use Flarum\Console\AbstractCommand;
 use Flarum\User\User;
+use Flarum\Foundation\Paths;
 use Symfony\Component\Console\Input\InputOption;
 
 class ExportDomainsCommand extends AbstractCommand
 {
+    public function __construct(
+        private readonly Paths $paths
+    ) {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -28,22 +35,31 @@ class ExportDomainsCommand extends AbstractCommand
                 continue;
             }
             $domain = strtolower(substr(strrchr($user->email, '@'), 1));
-            if (!isset($domains[$domain])) {
-                $domains[$domain] = 0;
-            }
-            $domains[$domain]++;
+            $domains[$domain] = ($domains[$domain] ?? 0) + 1;
         }
 
-        arsort($domains); // Ordina per frequenza dal maggiore al minore
+        arsort($domains);
+
+        $filename = 'mailguard_export_' . date('Y_m_d_His') . '.' . ($format === 'json' ? 'json' : 'csv');
+        $tmpPath = $this->paths->storage . '/tmp';
+        
+        if (!is_dir($tmpPath)) {
+            mkdir($tmpPath, 0755, true);
+        }
+        
+        $filePath = $tmpPath . '/' . $filename;
 
         if ($format === 'json') {
-            $this->output->writeln(json_encode($domains, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-            return;
+            file_put_contents($filePath, json_encode($domains, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        } else {
+            $csv = "domain,count\n";
+            foreach ($domains as $domain => $count) {
+                $csv .= "{$domain},{$count}\n";
+            }
+            file_put_contents($filePath, $csv);
         }
 
-        $this->output->writeln('domain,count');
-        foreach ($domains as $domain => $count) {
-            $this->output->writeln("{$domain},{$count}");
-        }
+        $this->output->writeln("<info>Esportazione completata con successo.</info>");
+        $this->output->writeln("Il file è stato salvato in modo sicuro in: <comment>{$filePath}</comment>");
     }
 }

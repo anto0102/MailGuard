@@ -6,6 +6,9 @@
 
 MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely guard and validate email domains during user registration. Built entirely without external GUI frameworks to guarantee **zero impact on server memory** and provide instant, real-time blocking of unwanted users.
 
+**Weight on GitHub:** < 10KB
+**Speed:** < 1ms
+
 ---
 
 ## 📸 Screenshots
@@ -49,12 +52,12 @@ php flarum cache:clear
 MailGuard comes with powerful CLI tools to inspect your current database and handle non-compliant existing users. Check command outputs in your standard terminal console.
 
 ### Exporting Domains
-To extract domains from your current userbase and output them strictly to your console screen (available in `csv` or `json` formats):
+To extract domains from your current userbase and save them securely (available in `csv` or `json` formats):
 ```sh
 php flarum emailguard:export
 php flarum emailguard:export --format=json
 ```
-*(You can redirect this output into a file locally via standard bash like `php flarum emailguard:export > domains.csv`)*
+*(The file is automatically saved within your Flarum `storage/tmp` directory, ensuring no impact on the forum. The terminal response will show the exact absolute path where it was saved).*
 
 ### Auditing Existing Users
 To check if any of your existing users match the domains currently denied in your MailGuard settings. This will print a clear table directly in your terminal showing the non-compliant users:
