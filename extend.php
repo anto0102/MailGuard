@@ -1,14 +1,9 @@
 <?php
 
 use Flarum\Extend;
-use Flarum\User\UserValidator;
-use Illuminate\Validation\Validator;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Anto0102\MailGuard\Console\AuditEmailDomainsCommand;
 use Anto0102\MailGuard\Console\ExportDomainsCommand;
 use Flarum\User\Event\Saving;
-use Illuminate\Support\Arr;
-use Flarum\Foundation\ValidationException;
 
 return [
     (new Extend\Frontend('admin'))

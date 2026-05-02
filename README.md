@@ -4,8 +4,6 @@
 
 MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely guard and validate email domains during user registration. Built entirely without external GUI frameworks to guarantee 0 impact on server memory and instant real-time blocks.
 
-*(Include your screenshots here in the repository!)*
-
 ## Features
 
 * **Allowlist / Denylist**: Block specific disposable email domains or restrict your forum strictly to internal company emails.
@@ -18,7 +16,7 @@ MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely gua
 Install manually or via composer:
 
 ```sh
-composer require anto0102/sanized
+composer require anto0102/mailguard
 ```
 
 *(Ensure you rebuild your flarum extensions cache after installation)*

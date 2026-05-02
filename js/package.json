@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@acme/flarum-email-domain-guard",
+  "name": "@anto0102/flarum-mailguard",
   "devDependencies": {
     "flarum-webpack-config": "^3.0.0",
     "webpack": "^5.0.0",
