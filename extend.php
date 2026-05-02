@@ -24,9 +24,6 @@ return [
         ->default('anto0102-mailguard.dot_message', 'Dots (.) are not allowed in the email address.')
         ->default('anto0102-mailguard.clone_message', 'An account with a similar email (alias) already exists.'),
 
-    (new Extend\Validator(\Flarum\User\UserValidator::class))
-        ->configure(Anto0102\MailGuard\Validator\EmailValidator::class),
-
     (new Extend\Event())
         ->listen(Saving::class, Anto0102\MailGuard\Listener\FilterEmailDomain::class),
 
