@@ -24,14 +24,14 @@ class AuditEmailDomainsCommand extends AbstractCommand
             ->addOption('delete', 'd', InputOption::VALUE_NONE, 'Delete non-compliant users (admins are always skipped)');
     }
 
-    protected function fire(): void
+    protected function fire(): int
     {
         $mode = $this->settings->get('anto0102-mailguard.mode', 'allow');
         $domainsRaw = $this->settings->get('anto0102-mailguard.domains', '');
 
         if (empty(trim($domainsRaw))) {
             $this->error('No domains configured. Set them in the admin panel first.');
-            return;
+            return 1;
         }
 
         $domainList = array_map(
@@ -75,7 +75,7 @@ class AuditEmailDomainsCommand extends AbstractCommand
 
         if (empty($nonCompliant)) {
             $this->info('All users comply with the email domain rules.');
-            return;
+            return 0;
         }
 
         $this->info(count($nonCompliant) . ' non-compliant user(s) found:');
@@ -97,5 +97,7 @@ class AuditEmailDomainsCommand extends AbstractCommand
                 $this->info('Aborted. No users were deleted.');
             }
         }
+
+        return 0;
     }
 }

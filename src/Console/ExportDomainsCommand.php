@@ -23,7 +23,7 @@ class ExportDomainsCommand extends AbstractCommand
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'Output format (json o csv)', 'csv');
     }
 
-    protected function fire(): void
+    protected function fire(): int
     {
         $format = strtolower($this->input->getOption('format'));
         
@@ -61,5 +61,7 @@ class ExportDomainsCommand extends AbstractCommand
 
         $this->output->writeln("<info>Esportazione completata con successo.</info>");
         $this->output->writeln("Il file è stato salvato in modo sicuro in: <comment>{$filePath}</comment>");
+
+        return 0;
     }
 }
