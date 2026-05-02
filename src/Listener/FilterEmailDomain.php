@@ -20,14 +20,20 @@ class FilterEmailDomain
             return;
         }
 
-        [$localPart, $emailDomain] = explode('@', strtolower($email), 2);
+        // Robust split preserving original casing for local/domain
+        if (!str_contains($email, '@')) return;
+        
+        $atPos = strrpos($email, '@');
+        $localPart = substr($email, 0, $atPos);
+        $emailDomain = strtolower(substr($email, $atPos + 1));
 
         $catchPlus = (bool) $this->settings->get('anto0102-mailguard.catch_plus_aliases', false);
         $dotStrategy = $this->settings->get('anto0102-mailguard.catch_dot_aliases', 'none');
 
         if ($catchPlus || $dotStrategy !== 'none') {
             $isAlias = false;
-            $newLocalPart = $localPart;
+            $workLocalPart = strtolower($localPart); // Use lowercase for logic only
+            $newLocalPart = $workLocalPart;
             
             // Handle Plus Aliases
             if ($catchPlus && str_contains($newLocalPart, '+')) {
@@ -35,7 +41,7 @@ class FilterEmailDomain
                 $isAlias = true;
             }
             
-            // Handle Dot Strategy (only for Gmail/Googlemail)
+            // Handle Dot Strategy
             if ($dotStrategy !== 'none' && str_contains($newLocalPart, '.') && in_array($emailDomain, ['gmail.com', 'googlemail.com'], true)) {
                 if ($dotStrategy === 'block') {
                     throw new ValidationException(['email' => $this->settings->get('anto0102-mailguard.dot_message', 'Dots (.) are not allowed in the email address.')]);
@@ -44,8 +50,8 @@ class FilterEmailDomain
                 $isAlias = true;
             }
 
-            if ($isAlias && $newLocalPart !== $localPart) {
-                // Verify provider list only if we actually detected an alias/dot that needs processing
+            if ($isAlias && $newLocalPart !== $workLocalPart) {
+                // Verify provider list only if an alias was detected
                 $providers = trim($this->settings->get('anto0102-mailguard.sanitize_providers', "gmail.com\ngooglemail.com"));
                 $providerList = array_filter(array_map('trim', explode("\n", strtolower($providers))));
                 
@@ -64,12 +70,13 @@ class FilterEmailDomain
                     } elseif ($action === 'block') {
                         throw new ValidationException(['email' => $this->settings->get('anto0102-mailguard.alias_message', 'Alias emails (+) are not allowed.')]);
                     } else {
+                        // "Silent Clean": Replace email with normalized version
                         $sanitizedEmail = $newLocalPart . '@' . $emailDomain;
                         if (\Flarum\User\User::query()->where('email', $sanitizedEmail)->exists()) {
                             throw new ValidationException(['email' => $this->settings->get('anto0102-mailguard.clone_message', 'An account with a similar email (alias) already exists.')]);
                         }
                         $user->email = $sanitizedEmail;
-                        $emailDomain = strtolower(substr(strrchr($sanitizedEmail, '@'), 1)); // Refresh domain for MX check
+                        $emailDomain = $emailDomain; // Domain stays the same
                     }
                 }
             }
