@@ -1,5 +1,8 @@
 # Flarum MailGuard
-![Flarum 2.0 Compatible](https://img.shields.io/badge/Flarum-2.0-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Flarum 2.0 Compatible](https://img.shields.io/badge/Flarum-2.0-blue.svg) [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Total Downloads](https://poser.pugx.org/anto0102/mailguard/downloads)](https://packagist.org/packages/anto0102/mailguard)
+[![Latest Stable Version](https://poser.pugx.org/anto0102/mailguard/v)](https://packagist.org/packages/anto0102/mailguard)
+[![Monthly Downloads](https://poser.pugx.org/anto0102/mailguard/d/monthly)](https://packagist.org/packages/anto0102/mailguard)
 
 MailGuard is a lightweight, ultra-optimized Flarum 2.0 extension to securely guard and validate email domains during user registration. Built entirely without external GUI frameworks to guarantee **zero impact on server memory** and provide instant, real-time blocking of unwanted users.
 
