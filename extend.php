@@ -16,11 +16,13 @@ return [
         ->default('anto0102-mailguard.domains', '')
         ->default('anto0102-mailguard.message', 'Registration with this email domain is not allowed.')
         ->default('anto0102-mailguard.check_mx', false)
-        ->default('anto0102-mailguard.sanitize_aliases', false)
+        ->default('anto0102-mailguard.catch_plus_aliases', false)
+        ->default('anto0102-mailguard.catch_dot_aliases', 'none')
         ->default('anto0102-mailguard.sanitize_providers', "gmail.com\ngooglemail.com")
         ->default('anto0102-mailguard.alias_action', 'block')
-        ->default('anto0102-mailguard.alias_message', 'Alias emails (+ or dots) are not allowed.')
-        ->serializeToForum('anto0102-mailguard.sanitize_aliases', 'anto0102-mailguard.sanitize_aliases', 'boolval', false),
+        ->default('anto0102-mailguard.alias_message', 'Alias emails (+) are not allowed.')
+        ->default('anto0102-mailguard.dot_message', 'Dots (.) are not allowed in the email address.')
+        ->default('anto0102-mailguard.clone_message', 'An account with a similar email (alias) already exists.'),
 
     (new Extend\Event())
         ->listen(Saving::class, Anto0102\MailGuard\Listener\FilterEmailDomain::class),
